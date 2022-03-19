@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to MDSINE2_Paper code and to Synthetic Data Output
-MDSINE2_PAPER_CODE_PATH=${MDSINE2_PAPER_CODE_PATH:-"/PHShome/as1010/MDSINE2_Paper"}
+MDSINE2_PAPER_CODE_PATH=${MDSINE2_PAPER_CODE_PATH:-"/home/arash/MDSINE2_Arash_Paper"}
 MDSINE2_OUTPUT_PATH="${MDSINE2_PAPER_CODE_PATH}/analysis/output/gibson"
 PREPROCESSED_PATH="${MDSINE2_PAPER_CODE_PATH}/analysis/output/gibson/preprocessed"
 
