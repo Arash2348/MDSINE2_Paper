@@ -31,7 +31,7 @@ QPCR_LEVEL=".0001"
 
 #/PHShome/as1010/MDSINE2_Paper/analysis/output/gibson/mdsine2_as1010/fixed_clustering/healthy-seed0-strong-sparse/mcmc.pkl
 #Aquire health dataset - only dataset used for testing
-HEALTHY_DATASET="${PREPROCESSED_PATH}/mcmc.pkl"
+HEALTHY_DATASET="${PREPROCESSED_PATH}/gibson_healthy_agg_taxa_filtered.pkl"
 
 echo "Default parameters"
 #Set current base paths for testing
