@@ -65,9 +65,15 @@ mdsine2 synthetic\
     --input {dset_fileloc} \
     --negbin {negbin_run} \
     --seed {seed} \
-    --a0-level {a0_level} \
-    --a1-level {a1_level} \
-    --qpcr-level {qpcr_level} \
+    --a0-level-low {a0_level_low} \
+    --a1-level-low {a1_level_low} \
+    --qpcr-level-low {qpcr_level_low} \
+    --a0-level-med {a0_level_med} \
+    --a1-level-med {a1_level_med} \
+    --qpcr-level-med {qpcr_level_med} \
+    --a0-level-high {a0_level_high} \
+    --a1-level-high {a1_level_high} \
+    --qpcr-level-high {qpcr_level_high} \
     --burnin {burnin} \
     --n-samples {n_samples} \
     --checkpoint {checkpoint} \
@@ -89,12 +95,24 @@ if __name__ == '__main__':
         help='This is the Gibson dataset we are performing inference on')
     parser.add_argument('--negbin', type=str, dest='negbin',
                         help='This is the MCMC object that was run to learn a0 and a1')
-    parser.add_argument('--a0-level', '-a0', type=float, dest='a0_level',
-                        help='This is the a0-noise-level for the synthetic data-generation parameter')
-    parser.add_argument('--a1-level', '-a1', type=float, dest='a1_level',
-                        help='This is the a1-noise-level for the synthetic data-generation parameter')
-    parser.add_argument('--qpcr-level', '-qpcr', type=float, dest='qpcr_level',
-                        help='This is the qpcr-noise-level for the synthetic data-generation parameter')
+    parser.add_argument('--a0-level-low', '-a0l', type=float, dest='a0_level_low',
+                        help='This is the a0-noise-level low for the synthetic data-generation parameter')
+    parser.add_argument('--a1-level-low', '-a1l', type=float, dest='a1_level_low',
+                        help='This is the a1-noise-level low for the synthetic data-generation parameter')
+    parser.add_argument('--qpcr-level-low', '-qpcrl', type=float, dest='qpcr_level_low',
+                        help='This is the qpcr-noise-level low for the synthetic data-generation parameter')
+    parser.add_argument('--a0-level-med', '-a0m', type=float, dest='a0_level_med',
+                        help='This is the a0-noise-level medium for the synthetic data-generation parameter')
+    parser.add_argument('--a1-level-med', '-a1m', type=float, dest='a1_level_med',
+                        help='This is the a1-noise-level medium for the synthetic data-generation parameter')
+    parser.add_argument('--qpcr-level-med', '-qpcrm', type=float, dest='qpcr_level_med',
+                        help='This is the qpcr-noise-level medium for the synthetic data-generation parameter')
+    parser.add_argument('--a0-level-high', '-a0h', type=float, dest='a0_level_high',
+                        help='This is the a0-noise-level high for the synthetic data-generation parameter')
+    parser.add_argument('--a1-level-high', '-a1h', type=float, dest='a1_level_high',
+                        help='This is the a1-noise-level high for the synthetic data-generation parameter')
+    parser.add_argument('--qpcr-level-high', '-qpcrh', type=float, dest='qpcr_level_high',
+                        help='This is the qpcr-noise-level high for the synthetic data-generation parameter')
     parser.add_argument('--seed', '-s', type=int, dest='seed',
                         help='This is the seed to initialize the inference with')
     parser.add_argument('--burnin', '-nb', type=int, dest='burnin',
@@ -129,19 +147,19 @@ if __name__ == '__main__':
     # Make the arguments
     jobname = args.rename_study
 
-    lsfdir = args.lsf_basepath
+    lsfdir = args.lsf_basepath #lsf_files/
 
-    script_path = os.path.join(lsfdir, 'scripts')
-    stdout_loc = os.path.abspath(os.path.join(lsfdir, 'stdout'))
-    stderr_loc = os.path.abspath(os.path.join(lsfdir, 'stderr'))
+    script_path = os.path.join(lsfdir, 'scripts') #lsf_files/scripts
+    stdout_loc = os.path.abspath(os.path.join(lsfdir, 'stdout')) #lsf_files/stdout
+    stderr_loc = os.path.abspath(os.path.join(lsfdir, 'stderr')) #lsf_files/stderr
     os.makedirs(script_path, exist_ok=True)
     os.makedirs(stdout_loc, exist_ok=True)
     os.makedirs(stderr_loc, exist_ok=True)
-    stdout_loc = os.path.join(stdout_loc, jobname + '.out')
-    stderr_loc = os.path.join(stderr_loc, jobname + '.err')
+    stdout_loc = os.path.join(stdout_loc, jobname + '.out') #lsf_files/stdout/healthy-seed0-strong-sparse.out
+    stderr_loc = os.path.join(stderr_loc, jobname + '.err') #lsf_files/stderr/healthy-seed0-strong-sparse.err
 
     os.makedirs(lsfdir, exist_ok=True)
-    lsfname = os.path.join(script_path, jobname + '.lsf')
+    lsfname = os.path.join(script_path, jobname + '.lsf') #lsf_files/scripts/healthy-seed0-strong-sparse.lsf
 
     f = open(lsfname, 'w')
     f.write(lsfstr.format(
@@ -151,12 +169,14 @@ if __name__ == '__main__':
         mem=args.memory, dset_fileloc=args.dataset,
         negbin_run=args.negbin, seed=args.seed, burnin=args.burnin,
         n_samples=args.n_samples, checkpoint=args.checkpoint,
-        rename_study=args.rename_study, basepath=args.basepath, a0_level=args.a0_level,
-        a1_level=args.a1_level, qpcr_level=args.qpcr_level))
+        rename_study=args.rename_study, basepath=args.basepath, a0_level_low=args.a0_level_low,
+        a1_level_low=args.a1_level_low, qpcr_level_low=args.qpcr_level_low, a0_level_med=args.a0_level_med,
+        a1_level_med=args.a1_level_med, qpcr_level_med=args.qpcr_level_med, a0_level_high=args.a0_level_high,
+        a1_level_high=args.a1_level_high, qpcr_level_high=args.qpcr_level_high))
     f.close()
     command = 'bsub < {}'.format(lsfname)
     print(command)
-    print("Successfuly got to almost end of python_lsf_syn")
+    print("Successfully got to almost end of python_lsf_syn")
     os.system(command)
 
 

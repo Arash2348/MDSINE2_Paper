@@ -24,9 +24,18 @@ CHECKPOINT="10"
 MULTIPROCESSING="0"
 
 #New Paramaters for Synthetic
-A0_LEVEL=".000001"
-A1_LEVEL=".000003"
-QPCR_LEVEL=".0001"
+A0_LEVEL_LOW=".000001"
+A1_LEVEL_LOW=".000003"
+QPCR_LEVEL_LOW=".0001"
+
+A0_LEVEL_MED=".00001"
+A1_LEVEL_MED=".0250"
+QPCR_LEVEL_MED=".0225"
+
+A0_LEVEL_HIGH=".0001"
+A1_LEVEL_HIGH=".09"
+QPCR_LEVEL_HIGH=".0001"
+
 
 
 #/PHShome/as1010/MDSINE2_Paper/analysis/output/gibson/mdsine2_as1010/fixed_clustering/healthy-seed0-strong-sparse/mcmc.pkl
@@ -53,9 +62,15 @@ python scripts/python_lsf_syn.py \
     --dataset $HEALTHY_DATASET \
     --negbin $NEGBIN \
     --seed 0 \
-    --a0-level $A0_LEVEL \
-    --a1-level $A1_LEVEL \
-    --qpcr-level $QPCR_LEVEL \
+    --a0-level-low $A0_LEVEL_LOW \
+    --a1-level-low $A1_LEVEL_LOW \
+    --qpcr-level-low $QPCR_LEVEL_LOW \
+    --a0-level-med $A0_LEVEL_MED \
+    --a1-level-med $A1_LEVEL_MED \
+    --qpcr-level-med $QPCR_LEVEL_MED \
+    --a0-level-high $A0_LEVEL_HIGH \
+    --a1-level-high $A1_LEVEL_HIGH \
+    --qpcr-level-high $QPCR_LEVEL_HIGH \
     --burnin $BURNIN \
     --n-samples $N_SAMPLES \
     --checkpoint $CHECKPOINT \
@@ -66,24 +81,24 @@ python scripts/python_lsf_syn.py \
     --queue $QUEUE \
     --memory $MEM \
     --n-cpus $N_CPUS \
-
-python scripts/python_lsf_syn.py \
-    --dataset $HEALTHY_DATASET \
-    --negbin $NEGBIN \
-    --seed 1 \
-    --a0-level $A0_LEVEL \
-    --a1-level $A1_LEVEL \
-    --qpcr-level $QPCR_LEVEL \
-    --burnin $BURNIN \
-    --n-samples $N_SAMPLES \
-    --checkpoint $CHECKPOINT \
-    --rename-study $HEALTHY_SEED1 \
-    --output-basepath $BASEPATH \
-    --environment-name $ENVIRONMENT_NAME \
-    --code-basepath $MDSINE2_PAPER_CODE_PATH \
-    --queue $QUEUE \
-    --memory $MEM \
-    --n-cpus $N_CPUS \
+#
+#python scripts/python_lsf_syn.py \
+#    --dataset $HEALTHY_DATASET \
+#    --negbin $NEGBIN \
+#    --seed 1 \
+#    --a0-level $A0_LEVEL \
+#    --a1-level $A1_LEVEL \
+#    --qpcr-level $QPCR_LEVEL \
+#    --burnin $BURNIN \
+#    --n-samples $N_SAMPLES \
+#    --checkpoint $CHECKPOINT \
+#    --rename-study $HEALTHY_SEED1 \
+#    --output-basepath $BASEPATH \
+#    --environment-name $ENVIRONMENT_NAME \
+#    --code-basepath $MDSINE2_PAPER_CODE_PATH \
+#    --queue $QUEUE \
+#    --memory $MEM \
+#    --n-cpus $N_CPUS \
 
 
 #Previous paramaters before changing:
